@@ -12,6 +12,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 
+import java.time.LocalDate;
+
 @SpringBootApplication
 public class SpringRestApplication {
 
@@ -19,7 +21,7 @@ public class SpringRestApplication {
     public static void main(String[] args) {
         ApplicationContext context = SpringApplication.run(SpringRestApplication.class, args);
 
-        User usr = new User();
+        User usr = new User(LocalDate.now());
         usr.setId(1);
         usr.setName("Mert Alptekin");
 

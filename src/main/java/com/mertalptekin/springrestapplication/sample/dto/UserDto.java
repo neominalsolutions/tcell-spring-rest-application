@@ -7,6 +7,15 @@ public class UserDto {
     @JsonProperty("user_id")
     private Integer id;
 
+    public UserDto(Integer id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
+    public UserDto() {
+
+    }
+
     @JsonProperty("username")
     private String name;
 

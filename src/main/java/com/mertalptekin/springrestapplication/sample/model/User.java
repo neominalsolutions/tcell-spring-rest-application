@@ -10,6 +10,15 @@ public class User {
     private String name;
     private LocalDate birthday;
 
+    public  User(LocalDate birthday) {
+        this.birthday = birthday;
+    }
+
+    public User(Integer id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
     public Integer getId() {
         return id;
     }
