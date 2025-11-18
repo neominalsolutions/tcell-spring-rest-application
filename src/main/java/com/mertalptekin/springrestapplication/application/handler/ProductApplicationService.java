@@ -31,7 +31,7 @@ public class ProductApplicationService implements IProductApplicationService{
     @Override
     public ProductCreateResponse create(ProductCreateRequest request) {
 
-        log.info("Creating product {}", request);
+        log.debug("Creating product {}", request);
         Product entity = modelMapper.map(request, Product.class);
         this.productService.addProduct(entity);
         return this.modelMapper.map(entity, ProductCreateResponse.class);
@@ -42,27 +42,27 @@ public class ProductApplicationService implements IProductApplicationService{
 
         Product entity = this.modelMapper.map(request, Product.class);
         this.productService.updateProduct(entity);
-        log.info("Updating product {}", request);
+        log.debug("Updating product {}", request);
     }
 
     @Override
     public void delete(ProductDeleteRequest request) {
         this.productService.deleteProduct(request.id());
-        log.info("Deleting product {}", request);
+        log.debug("Deleting product {}", request);
     }
 
     @Override
     public ProductDetailResponse detail(ProductDetailRequest request) {
 
         Product entity = productService.getProductById(request.id());
-        log.info("Retrieving product {}", request);
+        log.debug("Retrieving product {}", request);
 
         return  modelMapper.map(entity, ProductDetailResponse.class);
     }
 
     @Override
     public List<ProductResponse> list(ProductRequest request) {
-        log.info("Retrieving all products");
+        log.debug("Retrieving all products");
         return productService.
                 getAllProducts(request.pageSize(),request.pageNumber(),request.searchKey(),request.sortKey()).stream()
                 .map(product -> modelMapper.map(product, ProductResponse.class))
@@ -77,6 +77,6 @@ public class ProductApplicationService implements IProductApplicationService{
         entity.setStock(request.quantity());
         productService.updateProduct(entity);
 
-       log.info("Stock out {}", request);
+       log.debug("Stock out {}", request);
     }
 }

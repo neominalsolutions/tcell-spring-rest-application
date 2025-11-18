@@ -1,4 +1,4 @@
-package com.mertalptekin.springrestapplication.controller;
+package com.mertalptekin.springrestapplication.presentation.controller;
 
 
 import com.mertalptekin.springrestapplication.sample.dto.UserDto;

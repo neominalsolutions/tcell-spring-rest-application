@@ -1,10 +1,7 @@
-package com.mertalptekin.springrestapplication.sample.config;
+package com.mertalptekin.springrestapplication.presentation.config;
 
-import com.mertalptekin.springrestapplication.application.request.product.ProductUpdateRequest;
-import com.mertalptekin.springrestapplication.domain.entity.Product;
 import com.mertalptekin.springrestapplication.sample.dto.UserDto;
 import org.modelmapper.ModelMapper;
-import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 

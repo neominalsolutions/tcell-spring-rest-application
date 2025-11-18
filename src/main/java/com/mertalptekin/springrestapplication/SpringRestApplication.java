@@ -37,8 +37,6 @@ public class SpringRestApplication {
 
 
         // Hibernate Dialect for H2 Database ?
-
-
         PaymentService paymentService = context.getBean(PaymentService.class);
 //        PaymentService paymentService1 = new PaymentService(new CashPayment());
         paymentService.pay();

@@ -5,8 +5,6 @@ import com.mertalptekin.springrestapplication.domain.entity.Product;
 import com.mertalptekin.springrestapplication.infra.repository.IProductRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.extern.slf4j.Slf4j;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -80,7 +78,7 @@ public class ProductService implements IProductService {
         }
 
         // Search işlemi ekleneceğinden dolayı ektra bir alan açılması lazım. Searchiçin findByName();
-        Page<Product> productsPage = productRepository.findAllByNameContains(search,pageRequest);
+        Page<Product> productsPage = productRepository.findAllByNameContainsIgnoreCase(search,pageRequest);
 
 
 

@@ -1,4 +1,4 @@
-package com.mertalptekin.springrestapplication.controller;
+package com.mertalptekin.springrestapplication.presentation.controller;
 
 
 import com.mertalptekin.springrestapplication.application.handler.IProductApplicationService;
@@ -7,6 +7,7 @@ import com.mertalptekin.springrestapplication.application.response.product.Produ
 import com.mertalptekin.springrestapplication.application.response.product.ProductDetailResponse;
 import com.mertalptekin.springrestapplication.application.response.product.ProductResponse;
 import com.mertalptekin.springrestapplication.infra.repository.IProductRepository;
+import jakarta.validation.Valid;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -66,7 +67,7 @@ public class ProductController {
     // veriyi json formatında post ederken @RequestBody kullanılır
     // POST -> Create New Product
     @PostMapping
-    public ResponseEntity<ProductCreateResponse> createProduct(@RequestBody ProductCreateRequest productRequest) {
+    public ResponseEntity<ProductCreateResponse> createProduct(@Valid @RequestBody ProductCreateRequest productRequest) {
 
         ProductCreateResponse response = productApplicationService.create(productRequest);
         // api/v1/products/12 -> yeni oluşturulan kaynağın URI'si ve Detail endpoint'ine yönlendirme
@@ -78,7 +79,7 @@ public class ProductController {
     // Update işlemleride ise standar 204 No Content dönmektir.
     // @PathVariable("id") Integer id -> güncellenecek olan resource idsi
     @PutMapping("{id}")
-    public ResponseEntity<String> updateProduct(@PathVariable("id") Integer id, @RequestBody ProductUpdateRequest productUpdateRequest) {
+    public ResponseEntity<String> updateProduct(@PathVariable("id") Integer id, @Valid @RequestBody ProductUpdateRequest productUpdateRequest) {
 
 
 
