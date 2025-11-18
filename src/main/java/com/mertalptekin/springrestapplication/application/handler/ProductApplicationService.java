@@ -8,6 +8,7 @@ import com.mertalptekin.springrestapplication.domain.entity.Product;
 import com.mertalptekin.springrestapplication.domain.service.IProductService;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -31,7 +32,10 @@ public class ProductApplicationService implements IProductApplicationService{
     public ProductCreateResponse create(ProductCreateRequest request) {
 
         log.info("Creating product {}", request);
-        Product entity = this.modelMapper.map(request, Product.class);
+        var entity = new Product();
+        BeanUtils.copyProperties(request,entity);
+//         Product entity = modelMapper.map(request, Product.class);
+
         this.productService.addProduct(entity);
 
         return this.modelMapper.map(entity, ProductCreateResponse.class);
