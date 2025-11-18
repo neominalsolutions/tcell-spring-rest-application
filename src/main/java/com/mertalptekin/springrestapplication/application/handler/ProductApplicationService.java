@@ -15,6 +15,7 @@ import java.util.List;
 public class ProductApplicationService implements IProductApplicationService{
     @Override
     public ProductCreateResponse create(ProductCreateRequest request) {
+
         System.out.println("Product created");
         return new ProductCreateResponse(1,"Product A");
     }
