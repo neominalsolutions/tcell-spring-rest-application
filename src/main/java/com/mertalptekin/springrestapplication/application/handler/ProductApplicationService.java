@@ -32,12 +32,8 @@ public class ProductApplicationService implements IProductApplicationService{
     public ProductCreateResponse create(ProductCreateRequest request) {
 
         log.info("Creating product {}", request);
-        var entity = new Product();
-        BeanUtils.copyProperties(request,entity);
-//         Product entity = modelMapper.map(request, Product.class);
-
+        Product entity = modelMapper.map(request, Product.class);
         this.productService.addProduct(entity);
-
         return this.modelMapper.map(entity, ProductCreateResponse.class);
     }
 

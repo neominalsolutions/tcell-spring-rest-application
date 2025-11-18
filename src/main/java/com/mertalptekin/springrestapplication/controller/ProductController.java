@@ -6,6 +6,8 @@ import com.mertalptekin.springrestapplication.application.request.product.*;
 import com.mertalptekin.springrestapplication.application.response.product.ProductCreateResponse;
 import com.mertalptekin.springrestapplication.application.response.product.ProductDetailResponse;
 import com.mertalptekin.springrestapplication.application.response.product.ProductResponse;
+import com.mertalptekin.springrestapplication.infra.repository.IProductRepository;
+import org.modelmapper.ModelMapper;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,8 +19,11 @@ import java.util.List;
 public class ProductController {
 
     private final IProductApplicationService productApplicationService;
-    public ProductController(IProductApplicationService productApplicationService) {
+    private final ModelMapper modelMapper;
+
+    public ProductController(IProductApplicationService productApplicationService, IProductRepository productRepository, ModelMapper modelMapper) {
         this.productApplicationService = productApplicationService;
+        this.modelMapper = modelMapper;
     }
 
 
@@ -74,6 +79,8 @@ public class ProductController {
     // @PathVariable("id") Integer id -> güncellenecek olan resource idsi
     @PutMapping("{id}")
     public ResponseEntity<String> updateProduct(@PathVariable("id") Integer id, @RequestBody ProductUpdateRequest productUpdateRequest) {
+
+
 
         ProductDetailResponse response = productApplicationService.detail(new ProductDetailRequest(id));
 

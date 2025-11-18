@@ -7,6 +7,9 @@ import jakarta.persistence.EntityNotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -63,6 +66,24 @@ public class ProductService implements IProductService {
     @Override
     public List<Product> getAllProducts(Integer pageSize, Integer pageNumber, String search, String sort) {
         log.info("Getting all products");
-        return productRepository.findAll();
+
+        // name asc
+        String sortField = sort.split(" ")[0];
+        String sortDirection = sort.split(" ")[1];
+
+        PageRequest pageRequest;
+
+        if(sortDirection.equals("asc")){
+            pageRequest = PageRequest.of(pageNumber -1, pageSize, Sort.by(sortField).ascending());
+        } else {
+            pageRequest = PageRequest.of(pageNumber -1, pageSize, Sort.by(sortField).descending());
+        }
+
+        // Search işlemi ekleneceğinden dolayı ektra bir alan açılması lazım. Searchiçin findByName();
+        Page<Product> productsPage = productRepository.findAllByNameContains(search,pageRequest);
+
+
+
+        return productsPage.stream().toList();
     }
 }

@@ -8,5 +8,6 @@ import java.math.BigDecimal;
 public record ProductUpdateRequest(@JsonProperty("product_id") Integer id,
                                    @JsonProperty("product_name") String name,
                                    @JsonProperty("product_price") BigDecimal price,
-                                   @JsonProperty("product_quantity") Integer quantity) {
+                                   @JsonProperty("product_stock") Integer stock) {
 }
+
