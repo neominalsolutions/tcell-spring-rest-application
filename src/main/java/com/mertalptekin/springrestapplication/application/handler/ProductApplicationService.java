@@ -4,44 +4,79 @@ import com.mertalptekin.springrestapplication.application.request.product.*;
 import com.mertalptekin.springrestapplication.application.response.product.ProductCreateResponse;
 import com.mertalptekin.springrestapplication.application.response.product.ProductDetailResponse;
 import com.mertalptekin.springrestapplication.application.response.product.ProductResponse;
+import com.mertalptekin.springrestapplication.domain.entity.Product;
+import com.mertalptekin.springrestapplication.domain.service.IProductService;
+import lombok.extern.slf4j.Slf4j;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.util.List;
 
 // 1.Yöntem: Service Sınıfı Oluşturma
-
+// Caller Service -> Application Service -> Domain Service -> Repository
 @Service
+@Slf4j
 public class ProductApplicationService implements IProductApplicationService{
+
+    private final IProductService productService;
+    private final ModelMapper modelMapper;
+
+    public ProductApplicationService(IProductService productService, ModelMapper modelMapper) {
+        this.modelMapper = modelMapper;
+        this.productService = productService;
+    }
+
     @Override
     public ProductCreateResponse create(ProductCreateRequest request) {
 
-        System.out.println("Product created");
-        return new ProductCreateResponse(1,"Product A");
+        log.info("Creating product {}", request);
+        Product entity = this.modelMapper.map(request, Product.class);
+        this.productService.addProduct(entity);
+
+        return this.modelMapper.map(entity, ProductCreateResponse.class);
     }
 
     @Override
     public void update(ProductUpdateRequest request) {
-        System.out.println("Product Updated");
+
+        Product entity = this.modelMapper.map(request, Product.class);
+        this.productService.updateProduct(entity);
+        log.info("Updating product {}", request);
     }
 
     @Override
     public void delete(ProductDeleteRequest request) {
-        System.out.println("Product Deleted");
+        this.productService.deleteProduct(request.id());
+        log.info("Deleting product {}", request);
     }
 
     @Override
     public ProductDetailResponse detail(ProductDetailRequest request) {
-        return new ProductDetailResponse(1,"Sample Product", BigDecimal.valueOf(99.99), 10);
+
+        Product entity = productService.getProductById(request.id());
+        log.info("Retrieving product {}", request);
+
+        return  modelMapper.map(entity, ProductDetailResponse.class);
     }
 
     @Override
     public List<ProductResponse> list(ProductRequest request) {
-        return List.of(new ProductResponse(1,"Sample Product", BigDecimal.valueOf(99.99), 10), new ProductResponse(2,"Sample Product", BigDecimal.valueOf(99.99), 10), new ProductResponse(3,"Sample Product", BigDecimal.valueOf(99.99), 10));
+        log.info("Retrieving all products");
+        return productService.
+                getAllProducts(request.pageSize(),request.pageNumber(),request.searchKey(),request.sortKey()).stream()
+                .map(product -> modelMapper.map(product, ProductResponse.class))
+                .toList();
     }
 
     @Override
     public void stockOut(ProductStockOutRequest request) {
-        System.out.println("Product Stock Out");
+
+
+        Product entity = productService.getProductById(request.id());
+        entity.setStock(request.quantity());
+        productService.updateProduct(entity);
+
+       log.info("Stock out {}", request);
     }
 }
