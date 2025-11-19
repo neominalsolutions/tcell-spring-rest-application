@@ -1,4 +1,4 @@
-package com.mertalptekin.springrestapplication.application.response.product;
+package com.mertalptekin.springrestapplication.application.products.response.product;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
@@ -7,13 +7,12 @@ import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 
-// Tablar için ekstra bilgi eklenebilir
+
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class ProductDetailResponse {
-
+public class ProductResponse {
 
     @JsonProperty("product_id")
     private Integer id; // entity ile maplemek için aynı olsun dışarı çıkarken product_id olsun;

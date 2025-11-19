@@ -26,4 +26,9 @@ public class Product {
     @Column(nullable = false)
     private Integer stock;
 
+    // Many products can belong to one category
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "category_id", nullable = false) // FK
+    private Category category;
+
 }

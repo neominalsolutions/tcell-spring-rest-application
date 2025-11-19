@@ -1,11 +1,11 @@
 package com.mertalptekin.springrestapplication.presentation.controller;
 
 
-import com.mertalptekin.springrestapplication.application.handler.IProductApplicationService;
-import com.mertalptekin.springrestapplication.application.request.product.*;
-import com.mertalptekin.springrestapplication.application.response.product.ProductCreateResponse;
-import com.mertalptekin.springrestapplication.application.response.product.ProductDetailResponse;
-import com.mertalptekin.springrestapplication.application.response.product.ProductResponse;
+import com.mertalptekin.springrestapplication.application.products.handler.IProductApplicationService;
+import com.mertalptekin.springrestapplication.application.products.request.product.*;
+import com.mertalptekin.springrestapplication.application.products.response.product.ProductCreateResponse;
+import com.mertalptekin.springrestapplication.application.products.response.product.ProductDetailResponse;
+import com.mertalptekin.springrestapplication.application.products.response.product.ProductResponse;
 import com.mertalptekin.springrestapplication.infra.repository.IProductRepository;
 import jakarta.validation.Valid;
 import org.modelmapper.ModelMapper;

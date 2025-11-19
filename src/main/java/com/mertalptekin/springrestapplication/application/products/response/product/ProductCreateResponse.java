@@ -1,4 +1,4 @@
-package com.mertalptekin.springrestapplication.application.response.product;
+package com.mertalptekin.springrestapplication.application.products.response.product;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;

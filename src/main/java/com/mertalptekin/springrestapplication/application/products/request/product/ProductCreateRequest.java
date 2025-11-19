@@ -1,4 +1,4 @@
-package com.mertalptekin.springrestapplication.application.request.product;
+package com.mertalptekin.springrestapplication.application.products.request.product;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.constraints.*;

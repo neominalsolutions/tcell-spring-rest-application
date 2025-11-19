@@ -1,17 +1,15 @@
-package com.mertalptekin.springrestapplication.application.handler;
+package com.mertalptekin.springrestapplication.application.products.handler;
 
-import com.mertalptekin.springrestapplication.application.request.product.*;
-import com.mertalptekin.springrestapplication.application.response.product.ProductCreateResponse;
-import com.mertalptekin.springrestapplication.application.response.product.ProductDetailResponse;
-import com.mertalptekin.springrestapplication.application.response.product.ProductResponse;
+import com.mertalptekin.springrestapplication.application.products.request.product.*;
+import com.mertalptekin.springrestapplication.application.products.response.product.ProductCreateResponse;
+import com.mertalptekin.springrestapplication.application.products.response.product.ProductDetailResponse;
+import com.mertalptekin.springrestapplication.application.products.response.product.ProductResponse;
 import com.mertalptekin.springrestapplication.domain.entity.Product;
 import com.mertalptekin.springrestapplication.domain.service.IProductService;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 // 1.Yöntem: Service Sınıfı Oluşturma
