@@ -1,12 +1,50 @@
 package com.mertalptekin.springrestapplication.presentation.config;
 
 import com.mertalptekin.springrestapplication.application.users.UserDto;
+import com.mertalptekin.springrestapplication.domain.service.CustomUserDetailService;
 import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.AuthenticationProvider;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
+import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @Configuration
 public class AppConfig {
+
+    // veritabanından kullanıcı bilgilerini alıp spring security'e entegre etmek için kullanılır.
+    private final CustomUserDetailService customUserDetailService;
+
+    public AppConfig(CustomUserDetailService customUserDetailService) {
+        this.customUserDetailService = customUserDetailService;
+    }
+
+
+    @Bean
+    public UserDetailsService userDetailsService() {
+        return customUserDetailService;
+    }
+
+    @Bean
+    public BCryptPasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+
+    @Bean
+    public AuthenticationProvider authenticationProvider() {
+        // Not: Yeni yöntemde constructor ile userDetailsService set ediliyor.
+        DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider(userDetailsService());
+        authProvider.setPasswordEncoder(passwordEncoder());
+        return authProvider;
+    }
+
+    @Bean
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
+        return authenticationConfiguration.getAuthenticationManager();
+    }
 
     // Uygulama içerisinde config değerleri okumak ve aynı zamanda uygulama için gerekli olan bean tanımlarını yapmak için kullanılır.
 

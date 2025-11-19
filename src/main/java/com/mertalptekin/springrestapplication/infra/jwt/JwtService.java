@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
 public class JwtService {
 
     // Not: Key Vault üzerind etutulmalı. Azure Key Vault, AWS Secrets Manager gibi.
-    private final String secretKey = "1c8201d66f16acfc20c008a4f3b4904b928764e6f48a3734a999181346e4a93x";
+    private static final String secretKey = "1c8201d66f16acfc20c008a4f3b4904b928764e6f48a3734a999181346e4a93x";
 
     // Token oluşturma
     public String generateToken(UserDetails userDetails) {
@@ -28,7 +28,7 @@ public class JwtService {
         List<GrantedAuthority> authorities = userDetails.getAuthorities().stream().map(authority -> new SimpleGrantedAuthority(authority.toString())).collect(Collectors.toList());
         claims.put("roles", authorities);
 
-        // tokenda role değerleri eklenmiş oldu.
+        // token da role değerleri eklenmiş oldu.
 
         return Jwts.builder()
                 .setSubject(userDetails.getUsername())
