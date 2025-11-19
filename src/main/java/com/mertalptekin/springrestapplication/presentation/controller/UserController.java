@@ -6,7 +6,6 @@ import com.mertalptekin.springrestapplication.domain.entity.Role;
 import com.mertalptekin.springrestapplication.domain.entity.User;
 import com.mertalptekin.springrestapplication.infra.repository.IRoleRepository;
 import com.mertalptekin.springrestapplication.infra.repository.IUserRepository;
-import com.mertalptekin.springrestapplication.sample.service.UserService;
 import org.modelmapper.ModelMapper;
 import org.springframework.web.bind.annotation.*;
 
@@ -43,7 +42,7 @@ public class UserController {
 
         // findByNameIgnoreCaseIn -> çalışıyor
 
-       List<Role> roles =  roleRepository.findByNameInIgnoreCase(roleNames);
+       List<Role> roles =  roleRepository.findByNameInIgnoreCase(roleNames); // Query Method
 
        // aynı idli olan rolleri bulursan bunları user'a ata
        if(!roles.isEmpty()) {
