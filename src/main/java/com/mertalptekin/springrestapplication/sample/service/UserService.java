@@ -1,7 +1,8 @@
 package com.mertalptekin.springrestapplication.sample.service;
 
-import com.mertalptekin.springrestapplication.sample.dto.UserDto;
-import com.mertalptekin.springrestapplication.sample.model.User;
+
+import com.mertalptekin.springrestapplication.application.users.UserDto;
+import com.mertalptekin.springrestapplication.domain.entity.User;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 

@@ -26,10 +26,27 @@ public class Category {
 
 
     // mappedBy -> indicates that the "category" field in the Product entity owns the relationship
-    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Product> products; // navigation property -> association with Product entity
 
 }
+
+// EAGER olunca atılan Sorgu getCategoryById ile test ettik
+//select
+//c1_0.id,
+//c1_0.name,
+//p1_0.category_id,
+//p1_0.id,
+//p1_0.name,
+//p1_0.price,
+//p1_0.stock
+//        from
+//categories c1_0
+//left join
+//products p1_0
+//on c1_0.id=p1_0.category_id
+//        where
+//c1_0.id=?
 
 // CASCADE ALL: This option propagates all operations (PERSIST, MERGE, REMOVE, REFRESH, DETACH) from the parent entity to the associated child entities. For example, if a Category is deleted, all associated Products will also be deleted.
 // CASCADE PERSIST: This option propagates only the PERSIST operation from the parent entity to the associated child entities. When a new Category is saved, all new associated Products will also be saved automatically.
