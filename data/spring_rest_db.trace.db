@@ -555,3 +555,18 @@ DELETE * FROM ROLES WHERE ID=162 [42001-232]
 2025-11-19 11:57:42.496214+03:00 jdbc[13]: exception
 org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "DELETE [*]* FROM ROLES WHERE ID=162"; expected "identifier"; SQL statement:
 DELETE * FROM ROLES WHERE ID=162 [42001-232]
+2025-11-19 16:10:47.146671+03:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "DELETE [*]* FROM USERS"; expected "identifier"; SQL statement:
+DELETE * FROM USERS [42001-232]
+2025-11-19 16:16:20.451281+03:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "[*]'ccdadbb0-acb9-4c31-addb-54634b2ffe90'\000d\000a129"; SQL statement:
+'ccdadbb0-acb9-4c31-addb-54634b2ffe90'
+129 [42000-232]
+2025-11-19 16:16:20.575990+03:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "[*]'ccdadbb0-acb9-4c31-addb-54634b2ffe90'\000d\000a129"; SQL statement:
+'ccdadbb0-acb9-4c31-addb-54634b2ffe90'
+129 [42000-232]
+2025-11-19 16:16:22.468931+03:00 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "[*]'ccdadbb0-acb9-4c31-addb-54634b2ffe90'\000d\000a129"; SQL statement:
+'ccdadbb0-acb9-4c31-addb-54634b2ffe90'
+129 [42000-232]

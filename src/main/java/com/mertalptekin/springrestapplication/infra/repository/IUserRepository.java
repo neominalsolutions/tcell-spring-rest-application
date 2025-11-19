@@ -1,13 +1,13 @@
 package com.mertalptekin.springrestapplication.infra.repository;
 
-import com.mertalptekin.springrestapplication.domain.entity.User;
+import com.mertalptekin.springrestapplication.domain.entity.AppUser;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
 @Repository
-public interface IUserRepository extends JpaRepository<User, String> {
+public interface IUserRepository extends JpaRepository<AppUser, String> {
 
-    Optional<User> findByUsername(String username);
+    Optional<AppUser> findByUsername(String username);
 }

@@ -12,7 +12,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 import java.util.List;
-import java.util.stream.Collectors;
 
 // User Entity spring Security ile entegre olacak şekilde UserDetails implement etmelidir.
 
@@ -22,7 +21,7 @@ import java.util.stream.Collectors;
 @NoArgsConstructor
 @Entity
 @Table(name = "users")
-public class User implements UserDetails {
+public class AppUser implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -47,7 +46,7 @@ public class User implements UserDetails {
             joinColumns = @JoinColumn(name = "user_id"), // FK
             inverseJoinColumns = @JoinColumn(name = "role_id") // FK
     )
-    private List<Role> roles; // unidirectional association with Role entity
+    private List<AppRole> roles; // unidirectional association with Role entity
 
 
     // kullanıcıya atanan yetkiler, authenticated kullanıcı yetkileri buradan gelecek

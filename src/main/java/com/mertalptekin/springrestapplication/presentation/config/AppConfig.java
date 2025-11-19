@@ -22,7 +22,6 @@ public class AppConfig {
         this.customUserDetailService = customUserDetailService;
     }
 
-
     @Bean
     public UserDetailsService userDetailsService() {
         return customUserDetailService;
