@@ -5,6 +5,7 @@ import com.mertalptekin.springrestapplication.application.users.UserDto;
 import com.mertalptekin.springrestapplication.domain.entity.User;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
+import org.springframework.web.filter.OncePerRequestFilter;
 
 // Auto Bean tanımı -> @Service anotasyonu ile bu sınıfın bir servis bileşeni olduğunu belirtiyoruz. Spring bu sınıfı otomatik olarak tarar ve bir Bean olarak konteynıra ekler.
 // @Repository anotasyonu ise veri erişim katmanını belirtmek için kullanılır. Ancak burada servis katmanı için @Service anotasyonunu kullanıyoruz.
