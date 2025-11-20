@@ -43,6 +43,7 @@ public class SecurityConfig {
                                 .authenticated()
                 );
         http.sessionManagement(s -> s.sessionCreationPolicy(SessionCreationPolicy.STATELESS)); // Restful servislerde oturum yönetimini devre dışı bırakır.
+
         http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class); // OnceRequestFilter'ı güvenlik filtre zincirine ekler.
         http.exceptionHandling(SecurityConfig::customize); // dofilter chaninde geçemezsek buraya gireriz.
         http.headers(headers -> headers.frameOptions(HeadersConfigurer.FrameOptionsConfig::sameOrigin)); // H2 Console için frame desteği
