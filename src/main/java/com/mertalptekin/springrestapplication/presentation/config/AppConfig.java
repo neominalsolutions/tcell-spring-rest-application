@@ -73,16 +73,17 @@ public class AppConfig {
                 .setSkipNullEnabled(true)
                 .setFieldAccessLevel(org.modelmapper.config.Configuration.AccessLevel.PRIVATE);
 
-        modelMapper.createTypeMap(ProductCreateRequest.class, Product.class)
-                .setProvider(request -> {
-                    ProductCreateRequest source = (ProductCreateRequest) request.getSource();
-                    Product target = new Product();
-                    target.setName(source.name());
-                    target.setPrice(source.price());
-                    target.setStock(source.stock());
-                    target.setCategoryId(source.categoryId());
-                    return target;
-                });
+//        modelMapper.createTypeMap(ProductCreateRequest.class, Product.class)
+//                .setProvider(request -> {
+//                    ProductCreateRequest source = (ProductCreateRequest) request.getSource();
+//                    Product target = new Product();
+//                    target.setName(source.name());
+//                    target.setPrice(source.price());
+//                    target.setStock(source.stock());
+//                    target.setCategoryId(source.categoryId());
+//                    target.setCategory(null);
+//                    return target;
+//                });
 
         return modelMapper;
     }

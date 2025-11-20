@@ -10,6 +10,7 @@ import com.mertalptekin.springrestapplication.domain.service.IProductService;
 import com.mertalptekin.springrestapplication.infra.repository.ICategoryRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -32,7 +33,15 @@ public class ProductApplicationService implements IProductApplicationService{
     public ProductCreateResponse create(ProductCreateRequest request) {
 
         log.debug("Creating product {}", request);
-        Product entity = modelMapper.map(request, Product.class);
+
+        // 2.Yöntem: Spring BeanUtils ile mapleme, Javanın kendi mapping kavramı -> aşağıdaki senerayoda modelmapper ile entity state hatası aldık. Bu durumlarda karşılaşmamak için update ve save işlemlerinde BeanUtils kullanılabilir.
+        // okuma işlemlerinde modelmapper kullanılabilir. daha kolaylık sağlar ve entity state mapleme hatası alınmaz.
+        Product entity = new Product();
+        BeanUtils.copyProperties(request,entity);
+
+
+        // TODO: Model Mapper ile mapleme çalışmıyor. Nedenini araştır. ?
+//        Product entity = modelMapper.map(request, Product.class);
 
 //        Product entity1 = new Product();
 //        entity1.setName(request.name());
