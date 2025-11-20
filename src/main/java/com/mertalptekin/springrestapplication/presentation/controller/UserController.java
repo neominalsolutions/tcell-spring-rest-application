@@ -7,6 +7,7 @@ import com.mertalptekin.springrestapplication.domain.entity.AppUser;
 import com.mertalptekin.springrestapplication.infra.repository.IRoleRepository;
 import com.mertalptekin.springrestapplication.infra.repository.IUserRepository;
 import org.modelmapper.ModelMapper;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,11 +20,13 @@ public class UserController {
     private final IUserRepository userRepository;
     private final ModelMapper modelMapper;
     private final IRoleRepository roleRepository;
+    private final BCryptPasswordEncoder passwordEncoder;
 
-    public UserController(IUserRepository userRepository, ModelMapper modelMapper, IRoleRepository roleRepository) {
+    public UserController(IUserRepository userRepository, ModelMapper modelMapper, IRoleRepository roleRepository, BCryptPasswordEncoder passwordEncoder) {
         this.roleRepository = roleRepository;
         this.modelMapper = modelMapper;
         this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
 
@@ -36,8 +39,11 @@ public class UserController {
 
     @PostMapping
     public UserDto createUser(@RequestBody UserDto userDto) {
-        AppUser user = modelMapper.map(userDto, AppUser.class);
 
+        // Kullacının parola bilgisini şifreli olarak set etmemiz gerekecek.
+        userDto.setPassword(passwordEncoder.encode(userDto.getPassword())); // hashed password
+
+        AppUser user = modelMapper.map(userDto, AppUser.class);
         List<String> roleNames = userDto.getRoles().stream().map(RoleDto::getName).toList();
 
         // findByNameIgnoreCaseIn -> çalışıyor
@@ -50,6 +56,8 @@ public class UserController {
        }
 
         userRepository.save(user);
+        user.setPassword(null);
+
         return modelMapper.map(user, UserDto.class);
     }
 

@@ -7,6 +7,11 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 
+// 1- UserNamePasswordAuthentication ile AuthenticationManager.auth -> CustomUserDetailService.loadUserByUsername
+// 2- loadUserByUsername -> username göre kullanıcı bulma.
+// 3- DaoAuthenticationProvider -> üzerinden retrieveUser methodunu çalıştırır
+// 4-   AuthenticationManager.auth -> methodundan devam eder. this.preAuthenticationChecks.check(user);
+// 5- DaoAuthenticationProvider additionalAuthenticationChecks üzerinden kullanıcı ve password hash bilgilerini kontrol eder.
 
 // kullanıcının login işlemi sırasında user detaylarını yüklemek için kullanılır.
 

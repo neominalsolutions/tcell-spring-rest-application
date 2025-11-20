@@ -22,10 +22,6 @@ public class AppConfig {
         this.customUserDetailService = customUserDetailService;
     }
 
-    @Bean
-    public UserDetailsService userDetailsService() {
-        return customUserDetailService;
-    }
 
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {
@@ -35,7 +31,7 @@ public class AppConfig {
     @Bean
     public AuthenticationProvider authenticationProvider() {
         // Not: Yeni yöntemde constructor ile userDetailsService set ediliyor.
-        DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider(userDetailsService());
+        DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider(customUserDetailService);
         authProvider.setPasswordEncoder(passwordEncoder());
         return authProvider;
     }

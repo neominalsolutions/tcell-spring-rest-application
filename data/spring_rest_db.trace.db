@@ -570,3 +570,6 @@ org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "[*]'ccda
 org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "[*]'ccdadbb0-acb9-4c31-addb-54634b2ffe90'\000d\000a129"; SQL statement:
 'ccdadbb0-acb9-4c31-addb-54634b2ffe90'
 129 [42000-232]
+2025-11-20 09:40:47.513849+03:00 jdbc[28]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "DELETE  FROM USERS WHERE Password=P[*]@ssword1"; SQL statement:
+DELETE  FROM USERS WHERE Password=P@ssword1 [42000-232]
