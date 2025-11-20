@@ -4,8 +4,10 @@ import com.mertalptekin.springrestapplication.application.products.request.produ
 import com.mertalptekin.springrestapplication.application.products.response.product.ProductCreateResponse;
 import com.mertalptekin.springrestapplication.application.products.response.product.ProductDetailResponse;
 import com.mertalptekin.springrestapplication.application.products.response.product.ProductResponse;
+import com.mertalptekin.springrestapplication.domain.entity.Category;
 import com.mertalptekin.springrestapplication.domain.entity.Product;
 import com.mertalptekin.springrestapplication.domain.service.IProductService;
+import com.mertalptekin.springrestapplication.infra.repository.ICategoryRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
@@ -20,10 +22,12 @@ public class ProductApplicationService implements IProductApplicationService{
 
     private final IProductService productService;
     private final ModelMapper modelMapper;
+    private final ICategoryRepository categoryRepository;
 
-    public ProductApplicationService(IProductService productService, ModelMapper modelMapper) {
+    public ProductApplicationService(IProductService productService, ModelMapper modelMapper, ICategoryRepository categoryRepository) {
         this.modelMapper = modelMapper;
         this.productService = productService;
+        this.categoryRepository = categoryRepository;
     }
 
     @Override
@@ -31,6 +35,10 @@ public class ProductApplicationService implements IProductApplicationService{
 
         log.debug("Creating product {}", request);
         Product entity = modelMapper.map(request, Product.class);
+
+        Category category = categoryRepository.findById(request.categoryId()).orElseThrow();
+
+        entity.setCategory(category);
         this.productService.addProduct(entity);
         return this.modelMapper.map(entity, ProductCreateResponse.class);
     }
