@@ -56,6 +56,9 @@ public class SecurityConfig {
                 .cors(cors -> cors.configurationSource(corsConfigurationSource())) // CORS burada etkin
                 .authorizeHttpRequests(requests ->
                         requests
+                                .requestMatchers("/swagger-ui/**").permitAll()
+                                .requestMatchers("/v3/api-docs/**").permitAll()
+                                .requestMatchers("/swagger-ui.html").permitAll()
                                 .requestMatchers("/api/v1/auth/**","/h2-console/**").permitAll()
                                 .requestMatchers("/api/v1/users/**").hasAnyAuthority("ROLE_Admin") // user endpoint girecek olanlar sadece admin yetkisine sahip olmalı, route bazlı yetkilendirme
                                 .anyRequest()

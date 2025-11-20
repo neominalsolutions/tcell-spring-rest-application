@@ -7,6 +7,11 @@ import com.mertalptekin.springrestapplication.application.products.response.prod
 import com.mertalptekin.springrestapplication.application.products.response.product.ProductDetailResponse;
 import com.mertalptekin.springrestapplication.application.products.response.product.ProductResponse;
 import com.mertalptekin.springrestapplication.infra.repository.IProductRepository;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +22,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/products")
+@Tag(name="Product Controller", description="Product API Endpoints")
 public class ProductController {
 
     private final IProductApplicationService productApplicationService;
@@ -41,6 +47,7 @@ public class ProductController {
     // api/v1/products?search=&page=1&size=100&sort=name asc
     // @RequestParam -> Query Parametrelerini yakalamak için kullanılır
     @GetMapping
+    @Operation(summary = "Get All Products", description = "Retrieve a list of products with optional search, pagination, and sorting.")
     public ResponseEntity<List<ProductResponse>> getAllProducts(
             @RequestParam(required = false, defaultValue = "") String search,
             @RequestParam(required = false, defaultValue = "1") Integer page,
@@ -54,6 +61,11 @@ public class ProductController {
 
     // api/v1/products/1
     @GetMapping("{id}")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Ürün detayını getirir", content = {
+                    @Content(mediaType = "application/json", schema = @io.swagger.v3.oas.annotations.media.Schema(implementation = ProductDetailRequest.class))}),
+            @ApiResponse(responseCode = "404", description = "Ürün bulunamadı")
+    })
     public ResponseEntity<ProductDetailResponse> getProductById(@PathVariable("id") Integer id) {
         ProductDetailResponse response = productApplicationService.detail(new ProductDetailRequest(id));
 
