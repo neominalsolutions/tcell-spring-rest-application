@@ -18,6 +18,9 @@ public record ProductCreateRequest
         @JsonProperty("product_price") BigDecimal price,
 
 
-        @Max(value = 100, message = "Product stock must be less than or equal to 100")
-        @JsonProperty("product_stock") Integer stock
+        @Max(value = 100000, message = "Product stock must be less than or equal to 100000")
+        @JsonProperty("product_stock") Integer stock,
+                @NotNull(message = "CategoryId cannot be null")
+                @JsonProperty("category_id") Long categoryId
         ) { }
+
