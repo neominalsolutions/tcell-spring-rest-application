@@ -55,7 +55,6 @@ public class CategoryController {
             p.setName("Product " + rd.nextInt(1,1000));
             p.setPrice(BigDecimal.valueOf(rd.nextDouble(0,100)));
             p.setStock(rd.nextInt(0,100));
-            p.setCategory(category);
             products.add(p);
         }
 

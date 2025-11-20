@@ -22,12 +22,10 @@ public class ProductApplicationService implements IProductApplicationService{
 
     private final IProductService productService;
     private final ModelMapper modelMapper;
-    private final ICategoryRepository categoryRepository;
 
     public ProductApplicationService(IProductService productService, ModelMapper modelMapper, ICategoryRepository categoryRepository) {
         this.modelMapper = modelMapper;
         this.productService = productService;
-        this.categoryRepository = categoryRepository;
     }
 
     @Override
@@ -36,9 +34,12 @@ public class ProductApplicationService implements IProductApplicationService{
         log.debug("Creating product {}", request);
         Product entity = modelMapper.map(request, Product.class);
 
-        Category category = categoryRepository.findById(request.categoryId()).orElseThrow();
+//        Product entity1 = new Product();
+//        entity1.setName(request.name());
+//        entity1.setPrice(request.price());
+//        entity1.setStock(request.stock());
+//        entity1.setCategoryId(request.categoryId());
 
-        entity.setCategory(category);
         this.productService.addProduct(entity);
         return this.modelMapper.map(entity, ProductCreateResponse.class);
     }
@@ -47,6 +48,7 @@ public class ProductApplicationService implements IProductApplicationService{
     public void update(ProductUpdateRequest request) {
 
         Product entity = this.modelMapper.map(request, Product.class);
+
         this.productService.updateProduct(entity);
         log.debug("Updating product {}", request);
     }

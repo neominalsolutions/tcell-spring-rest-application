@@ -1,6 +1,8 @@
 package com.mertalptekin.springrestapplication.presentation.config;
 
+import com.mertalptekin.springrestapplication.application.products.request.product.ProductCreateRequest;
 import com.mertalptekin.springrestapplication.application.users.UserDto;
+import com.mertalptekin.springrestapplication.domain.entity.Product;
 import com.mertalptekin.springrestapplication.domain.service.CustomUserDetailService;
 import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;
@@ -63,11 +65,24 @@ public class AppConfig {
     public ModelMapper getModelMapper() {
         ModelMapper modelMapper = new ModelMapper();
 
+
+
         // Record sınıfları için gerekli konfigürasyon
         modelMapper.getConfiguration()
                 .setFieldMatchingEnabled(true)
                 .setSkipNullEnabled(true)
                 .setFieldAccessLevel(org.modelmapper.config.Configuration.AccessLevel.PRIVATE);
+
+        modelMapper.createTypeMap(ProductCreateRequest.class, Product.class)
+                .setProvider(request -> {
+                    ProductCreateRequest source = (ProductCreateRequest) request.getSource();
+                    Product target = new Product();
+                    target.setName(source.name());
+                    target.setPrice(source.price());
+                    target.setStock(source.stock());
+                    target.setCategoryId(source.categoryId());
+                    return target;
+                });
 
         return modelMapper;
     }

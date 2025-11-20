@@ -26,9 +26,11 @@ public class Product {
     @Column(nullable = false)
     private Integer stock;
 
-    // Many products can belong to one category
-    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.ALL}) // ManyToOne association with Category entity
-    @JoinColumn(name = "category_id", nullable = false) // FK
-    private Category category; // bidirectional association with Category entity
+    // FK column
+    @Column(name = "category_id", nullable = false)
+    private Long categoryId;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "category_id", insertable = false, updatable = false)
+    private Category category;
 }

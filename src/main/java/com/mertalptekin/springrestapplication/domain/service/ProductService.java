@@ -28,7 +28,7 @@ public class ProductService implements IProductService {
     @Override
     public Integer addProduct(Product product) {
 
-        this.productRepository.save(product);
+        this.productRepository.saveAndFlush(product);
         log.info("Product added: {}", product);
 
         return product.getId();
